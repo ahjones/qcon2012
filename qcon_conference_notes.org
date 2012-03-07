@@ -43,31 +43,50 @@ Joe Armstrong
      #+END_QUOTE
 
 *** The six properties of available systems
-**** Isolation
+**** 1. Isolation
      Formal definition: "my program should not fuck up your program". 
 
-**** Concurrency
+**** 2. Concurrency
      Programming in sequential languages is difficult because the
      world isn't seequential.
 
      "Embarrassingly parallel" problems: web servers.
 
-**** Must be able to detect failure
+**** 3. Must be able to detect failure
      If you can't detect it, you can't fix it. This must work across
      machine boundaries. If a machine dies you can't tell if it's the
      machine or the network.
 
      If you make things synchronous you'll bugger things up.
 
-**** Fault identification
+**** 4. Fault identification
      It's not enough to know that there is a fault.
 
-**** Live code upgrade
+**** 5. Live code upgrade
      Wow. Why would you want to stop it? We want zero downtime. Early
      requirement for Erlang. At Ericsson you got told off if your
      system was down for more than four minutes in a year. That's ~
      five nines availability.
 
-**** Stable storage
+**** 6. Stable storage
      Suppose all computers crash: you want your data back.
+
+*** Other thoughts
+**** Jim Gray
+     Fail fast: software should either function correctly or detect
+     the fault, signal failure and stop operating.
+
+     If you've got a single process you can't let it die. If you have
+     millions of processes, you can let a few thousand die.
+
+     See society: we wander around doing what we want, and if we fall
+     down with a heart attack the ambulance rocks up and fixes
+     you. Send in the medic.
+
+     Have threads that detect the failure of other threads.
+
+**** Messaging
+     #+BEGIN_QUOTE
+     The big idea is messaging. -- Alan Kay
+     #+END_QUOTE
 *** How to satisfy the properties in Erlang
