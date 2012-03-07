@@ -151,3 +151,98 @@ bar(X) ->
 **** Fault tolerance implies scalability
 *** Reading
     [[http://www.sics.se/~joe/thesis/armstrong_thesis_2003.pdf][Armstrong's Phd. thesis]]
+** High availability at Heroku
+   Mark McGranaghan @mmcgrana
+
+   Lessons learned from PaaS at Heroku
+
+   Everyone was doing the same over and over again: routing, runtime,
+   data. Package these three things, and then apps can use them.
+
+   Runs on AWS.
+
+*** What has to be available?
+    API, routing, packaging, data, logging, runtime.
+
+    1,000 instances (virtualised servers), 1,000,000 apps.
+
+*** Architecture
+    
+**** Platform available HA routing
+     Simply, a load balancer. If you lose a back end, the balancer
+     makes it transparent to the users.
+
+**** Crashes and supervision
+     Code crashes, get used to it. Locally, things like upstart work
+     fine. On a distributed platform, you need a global view of
+     application health. Supervisor detects exit codes, restart the
+     app.
+
+     
+***** Crashes as the only code path
+      Crash is the same path as normal app exit. This enables you to
+      handle the failure of an instance, eg if AWS nukes it.
+
+***** Error kernel
+      Gets more reliable as you make it smaller.
+
+**** Message passing
+     Nodes communicate to a message broker with narrow, versionable
+     JSON messages.
+
+     At any given time there are going to be apps that speak the old
+     version, and apps that speak the new vesion.
+
+**** See Erlang
+     Heroku tries to solve the same problems that Erlang has. It's not
+     surpring that there is a similarity in the approaches.
+
+     One broker is a single point of failure. To get around that:
+
+**** Publish one, subscribe many
+     If one broker fails, transparrently failover in the client to a
+     different broker.
+     
+**** Graceful degradation
+     If you've got distributed services and you can't read from one,
+     gracefully degrade.
+
+     If you can't write to a service, persist an 'owe' write. When the
+     service comes back on line, persist the owed write. All billing
+     writes tickets locally, then asynchronously writes the
+     information to the service.
+
+*** Execution
+    Everything outside of architecture: culture, organisation, etc.
+
+    Heroku recently had a problem. They had a post-mortem of the
+    incident, which took a team about a week. They've noticed that
+    most of the causes weren't completely technical. They involved
+    people.
+
+    What are the biggest causes of availability failures? Not the
+    architecture. Failed deploys (too fast, too slow); bad visibility;
+    cascading feedback.
+
+**** Deployment
+     Has to be repeatable.
+
+     #+BEGIN_SRC bash
+     bin/ship --component api --vesion 1234
+     #+END_SRC
+
+     Some initial pool of deploy servers: .5% of the nodes. Use the
+     data coming back from the nodes to determine whether the deploy
+     will be successful. When ready, deploy to others over period of
+     between minutes and weeks.
+
+**** Incremental rollout
+     Heroku had a large change to the way processes work, but they
+     managed to roll it out incrementally without users noticing. 
+
+     Feature flag.
+
+     Core orchestration app.
+
+     Ship the code incrementally *then* ship the feature incrementally
+     to new users.
