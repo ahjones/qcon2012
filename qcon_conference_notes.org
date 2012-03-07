@@ -432,3 +432,38 @@ assert(p99_latency < 50)
 
    Expectations were that company size would correlate with the number
    of transactions per second that the stack would have to cope with.
+** Decisions, decisions
+
+   Dan North @tastapod
+
+   "Every decision you make is a trade-off", or, there are no best
+   practices.
+
+   Often we make decisions without realising that there is a
+   trade-off. 
+
+   If you can't say what you're trading off you're not able to make a
+   rational decision.
+
+   - Team composition
+   - Development style
+   - Architecture
+   - Deployment
+
+*** Team composition
+
+    Why care? See Conway's law.
+
+    What about co-located or distributed? What are you trading off?
+    Play the trade off game. 
+    
+    * Feature teams vs layer teams
+    * Experienced or inexperienced
+      What if there's a bunch of grunt work? The junior guys could
+      have fun learning and being mentored. Get the work appropriate
+      for the people.
+    * Small teams vs big teams
+
+*** Development style
+*** Architecture
+*** Deployment
