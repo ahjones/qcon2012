@@ -259,8 +259,12 @@ bar(X) ->
       enters the red state, there's probably a problem.
 
       #+BEGIN_SRC
-      assert(p99_latency < 50)
+assert(p99_latency < 50)
       #+END_SRC
+
+      Time of day isn't accounted for, but mostly that's not a
+      problem: they're looking out for catastrophic failure. Perhaps
+      they'll consider using the derivative and the second derivative.
 
 ***** Flow control and backpressure
       Eventually flow will get to a node that can't handle the traffic
