@@ -227,7 +227,7 @@ bar(X) ->
 **** Deployment
      Has to be repeatable.
 
-     #+BEGIN_SRC bash
+     #+BEGIN_SRC
      bin/ship --component api --vesion 1234
      #+END_SRC
 
@@ -246,3 +246,29 @@ bar(X) ->
 
      Ship the code incrementally *then* ship the feature incrementally
      to new users.
+
+**** Availability
+
+***** Graph it.
+       Real time visibility. Availability can be thought of as how
+       often things go down, and how long the stay down. Keep an eye
+       on it.
+
+***** Service level assertions
+      Get the computer to keep an eye on the graphs. If the graph
+      enters the red state, there's probably a problem.
+
+      #+BEGIN_SRC
+      assert(p99_latency < 50)
+      #+END_SRC
+
+***** Flow control and backpressure
+      Eventually flow will get to a node that can't handle the traffic
+      that reaches. Potentially the whole branch that leads to the
+      node can get fried. If you have flow control, you can divert the
+      excess traffic away from the sensitive node, and avoid breaking
+      the path for everyone. Some traffic will get a 500, but not all.
+
+      echo 0 > /etc/rates/publish
+
+      This'll get picked up by the controller.
