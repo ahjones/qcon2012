@@ -276,3 +276,45 @@ assert(p99_latency < 50)
       echo 0 > /etc/rates/publish
 
       This'll get picked up by the controller.
+
+** Anomoly detection, fault tolerance, anticipation
+   John Allspaw @allspaw
+
+*** Four cornerstones
+    - Anticipation
+    - Monitoring
+    - Response
+    - Learning
+
+*** Monitoring and anomoly detection
+    Things break. It's harder to find out that you'd think it would
+    be.
+
+**** Active health check
+     HTTP call to service
+     |--------------------+------------------------|
+     | Pros               | Cons                   |
+     |--------------------+------------------------|
+     | Easy to implement  | Messaging can fail     |
+     | Easy to understand | Scalability is limited |
+     | Well-known pattern |                        |
+     |--------------------+------------------------|
+
+***** Supervisor sensitivity
+      1 sec timeout, 1 retry, 3 sec interval.
+
+      Just because you want to poll something every three seconds
+      doesn't mean it's going to happen every three seconds.
+
+      How many seconds of errors can you tolerate serving?
+
+**** Passive health check
+     "I'm alive"
+     - Pros
+       - Efficient
+       - Different scalability
+       - Fewer moving parts
+       - Less exposure
+       - Can submit to multiple places
+     - Cons
+       - Non ideal for network
