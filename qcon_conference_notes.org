@@ -129,12 +129,16 @@ Joe Armstrong
        In Erlang you can modify code as it runs.
 
        #+BEGIN_SRC erlang
-       -module(foo).
-       ...
-       f1(X) ->
-         foo:bar(X), % Call the latest version of this module
-         bar(X). % Call this version of bar
+-module(foo).
+...
+f1(X) ->
+    foo:bar(X), % Call the latest version of this module
+    bar(X). % Call this version of bar
        
-       bar(X) ->
-         ...
+bar(X) ->
+    ...
        #+END_SRC
+
+    6. Stable storage
+       Use mnesia
+       Use third party storage
