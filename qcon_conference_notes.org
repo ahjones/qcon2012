@@ -291,6 +291,7 @@ assert(p99_latency < 50)
     be.
 
 **** Active health check
+
      HTTP call to service
      - Pros
        - Easy to implement
@@ -306,9 +307,10 @@ assert(p99_latency < 50)
       Just because you want to poll something every three seconds
       doesn't mean it's going to happen every three seconds.
 
-      How many seconds of errors can you tolerate serving?
+      How many seconds of errors can you tolerate serving? 
 
 **** Passive health check
+     
      "I'm alive"
      - Pros
        - Efficient
@@ -321,6 +323,7 @@ assert(p99_latency < 50)
        - Non ideal for network
 
 **** Passive even logging
+
      True fire and forget
 
      - Pros
@@ -328,6 +331,7 @@ assert(p99_latency < 50)
      - Cons
        - Onus is on the app
 **** Context
+
      You've got to understand what's happening at the time. Eg: at
      Christmas you may not have the same behaviour as normal.
 
@@ -340,6 +344,7 @@ assert(p99_latency < 50)
      about?
 
 **** Smoothing
+
      - Moving average is a possibility
      - [[http://en.wikipedia.org/wiki/Exponential_smoothing][Holt-Winters exponential smoothing]]
        Make a forcast of time series data, the most recent data has an
@@ -348,3 +353,54 @@ assert(p99_latency < 50)
 
        Can use it to work out if something is out of bounds. You get a
        Holt-Winters aberration.
+
+*** Response
+
+**** Fault tolerance
+
+     - Detect
+     - Correct
+     - Clean up
+
+     - Redundancy
+       + Spatial - going to talk about this.
+       + Temporal
+       + Informational
+
+
+    Don't confuse variation and faults. A fault is an unexpected
+    variation that can't be compensated for or masked.
+
+***** Spatial redundancy
+
+      + Active / Active
+      + Active / Passive
+
+      + Roaming spare
+      + Dedicated spare
+
+***** In-line fault tolerance
+
+      Timeouts
+
+***** Fail closed
+      
+      Check the dependencies of the thing that your checking
+      too. Doesn't work too well with many dependencies. If you go too
+      crazy you move away from tolerating variance.
+
+***** Fail open
+
+      Carry on without a feature on failure. For example. IP location
+      lookup probably isn't that important if you don't have it.
+
+**** Systemic complexity
+
+     Cascading failure is often an example of resonance. "Each time we
+     have an instance of resonance between components we have an
+     opportunity to learn something new".
+
+*** Anticipation
+    
+    Imagination, not paranoia. Encourage "What could go wrong?"
+    thinking.
