@@ -292,13 +292,13 @@ assert(p99_latency < 50)
 
 **** Active health check
      HTTP call to service
-     |--------------------+------------------------|
-     | Pros               | Cons                   |
-     |--------------------+------------------------|
-     | Easy to implement  | Messaging can fail     |
-     | Easy to understand | Scalability is limited |
-     | Well-known pattern |                        |
-     |--------------------+------------------------|
+     - Pros
+       - Easy to implement
+       - Easy to understand
+       - Well-known pattern
+     - Cons
+       - Messaging can fail
+       - Limited scalability
 
 ***** Supervisor sensitivity
       1 sec timeout, 1 retry, 3 sec interval.
@@ -316,5 +316,35 @@ assert(p99_latency < 50)
        - Fewer moving parts
        - Less exposure
        - Can submit to multiple places
+       - Can scale out monitory to a much larger architecture
      - Cons
        - Non ideal for network
+
+**** Passive even logging
+     True fire and forget
+
+     - Pros
+       - On demand publish
+     - Cons
+       - Onus is on the app
+**** Context
+     You've got to understand what's happening at the time. Eg: at
+     Christmas you may not have the same behaviour as normal.
+
+     Static thresholds are difficult.
+
+     148,000 metrics at Etsy.
+
+     Finding out what's normal is a big deal. How do you know if a
+     drop or a lift is something that you've got to do something
+     about?
+
+**** Smoothing
+     - Moving average is a possibility
+     - [[http://en.wikipedia.org/wiki/Exponential_smoothing][Holt-Winters exponential smoothing]]
+       Make a forcast of time series data, the most recent data has an
+       exponentially larger influence on the prediction than later
+       data.
+
+       Can use it to work out if something is out of bounds. You get a
+       Holt-Winters aberration.
