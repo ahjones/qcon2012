@@ -1,0 +1,73 @@
+* QCon
+** Building highly available systems in Erlang
+Joe Armstrong
+*** The types of highly available systems
+    How do you get ten nines availability? Why even ten? The number is
+    arbitrary.
+
+    - Washing machine / pacemaker (!)
+      Very specialised, embedded. Processor and the data are in the
+      same place, so easy to program.
+    - Deep space mission
+      The only things that'll be left of humans after we're gone (so far)
+    - Aircraft control system
+      Wait until the plane is on the ground before changing the
+      software. Shut down the nuclear plant before updating the
+      software.
+    - Internet systems
+      This talk. Data and processing separate and distributed.
+
+*** Internet available systems
+    Systems like this need highly available data.
+
+    Computation can be performed anywhere.
+
+    We want many routes to the data.
+
+**** Where is my data?
+     If there are 10 million computers and my data is on ten of them,
+     I can't ask each computer if it has my data.
+
+***** Algorithm: [[http://en.wikipedia.org/wiki/Chord_(peer-to-peer)][Chord]]
+      + Hash the computers IPs
+      + Sort the hashes
+      + Hash the lookup key
+      + Put the data on the first machine with a hash that's lower
+        than the key's hash
+
+**** How do I store replicas in a consistent way?
+     Collect data in parallel. Save data in parallel.
+     
+     #+BEGIN_QUOTE
+     The problem of reliable storage of data has been solved. -- Joe Armstrong
+     #+END_QUOTE
+
+*** The six properties of available systems
+**** Isolation
+     Formal definition: "my program should not fuck up your program". 
+
+**** Concurrency
+     Programming in sequential languages is difficult because the
+     world isn't seequential.
+
+     "Embarrassingly parallel" problems: web servers.
+
+**** Must be able to detect failure
+     If you can't detect it, you can't fix it. This must work across
+     machine boundaries. If a machine dies you can't tell if it's the
+     machine or the network.
+
+     If you make things synchronous you'll bugger things up.
+
+**** Fault identification
+     It's not enough to know that there is a fault.
+
+**** Live code upgrade
+     Wow. Why would you want to stop it? We want zero downtime. Early
+     requirement for Erlang. At Ericsson you got told off if your
+     system was down for more than four minutes in a year. That's ~
+     five nines availability.
+
+**** Stable storage
+     Suppose all computers crash: you want your data back.
+*** How to satisfy the properties in Erlang
