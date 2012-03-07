@@ -1,6 +1,6 @@
 * QCon
 ** Building highly available systems in Erlang
-Joe Armstrong
+   Joe Armstrong
 *** The types of highly available systems
     How do you get ten nines availability? Why even ten? The number is
     arbitrary.
@@ -149,3 +149,5 @@ bar(X) ->
        Use third party storage
 
 **** Fault tolerance implies scalability
+*** Reading
+    [[http://www.sics.se/~joe/thesis/armstrong_thesis_2003.pdf][Armstrong's Phd. thesis]]
