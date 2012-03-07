@@ -227,7 +227,7 @@ bar(X) ->
 **** Deployment
      Has to be repeatable.
 
-     #+BEGIN_SRC
+     #+BEGIN_SRC bash
      bin/ship --component api --vesion 1234
      #+END_SRC
 
@@ -258,7 +258,7 @@ bar(X) ->
       Get the computer to keep an eye on the graphs. If the graph
       enters the red state, there's probably a problem.
 
-      #+BEGIN_SRC
+      #+BEGIN_SRC java
 assert(p99_latency < 50)
       #+END_SRC
 
@@ -483,6 +483,75 @@ assert(p99_latency < 50)
        process. If you don't try the manual process you might miss out
        information about the process.
 
+     * Automated vs manual testing
+       If you only have automated tests you miss out on exploratory
+       tests. Not only are you testing when you manually test, you're
+       reviewing.
+
+     * Test-first vs test-driven vs test-after vs test-whenever
+       Test first is all of the tests at the start.
+
+**** Pattern: spike and stabilise
+
+     Hack stuff together, see how it works, if you like it then you
+     can make it ready for production.
+
+     TDD is walking through water up to your chest. You're not
+     drowning, but you aren't going as fast as swimming.
+
+     Feeback from users vs feedback from defects
+
+     Invest in code based on evidence. Why put lots of effort into
+     writing tests when you aren't sure that you're going to use it.
+
 *** Development style
 *** Architecture
+
+    * Monolith vs components
+      As soon you've got components you've got to consider the
+      communications between the components.
+
+**** Pattern: short software half-life
+
+     Small expendable co-operating components. If I make the
+     assumption that half the code won't be there in three months, how
+     does that affect the way I approach it.
+
+     + Each component is fit for purpose. 
+     + Hard shell, soft centre.
+     + The message is the API.
+
+**** Pattern: ginger cake
+
+     The idea that you can copy and paste, and it's alright. If you
+     know what you're doing, you don't need to worry too much, until
+     it's a problem.
+
 *** Deployment
+
+    * Automated vs manual
+      As soon as you automate you elimate your ability to learn about
+      it.
+    * Vertical vs horizontal scaling
+    * Hosted vs in-house
+    * Bespoke or commodity
+
+**** Pattern: dancing skeleton
+
+     Just get something working is the walking skeleton pattern. The
+     dancing skeleton is putting something into production really
+     really quickly. It'd use the full stack, and have a REPL. You
+     have strings into the app, and pull the strings to make it
+     dance.
+
+*** Closing
+
+    If you don't understand your trade off, you don't understand the
+    decision you're making.
+
+
+#+begin_quote
+    When you know what you are trading off you can make informed
+    decisions.
+#+end_quote
+
