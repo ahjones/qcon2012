@@ -403,4 +403,32 @@ assert(p99_latency < 50)
 *** Anticipation
     
     Imagination, not paranoia. Encourage "What could go wrong?"
-    thinking.
+    thinking. People love to tell war-stories because they contain
+    hard-won lessons.
+
+    + FMEA
+    + FMECA
+
+    + Architecture review
+    + Go-or-no-go meeting
+    + "Game Day" exercises
+
+    Either wait for something to break while we're not watching, or
+    break it ourselves while we're watching.
+
+    When things go right, people are involved; when things go wrong,
+    people are involved.
+
+** Building technology mid-flight
+   Sam Hamilton
+
+*** Intro
+
+   Why mid-flight? The moment you have a customer, you need to serve
+   them at the same time that you're building your new site.
+
+   If your system is built for the next ten years, you need to ask how
+   much of it is being used.
+
+   Expectations were that company size would correlate with the number
+   of transactions per second that the stack would have to cope with.
