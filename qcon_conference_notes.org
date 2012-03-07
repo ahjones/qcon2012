@@ -555,3 +555,52 @@ assert(p99_latency < 50)
     decisions.
 #+end_quote
 
+** Developers have a mental disorder
+   Greg Young
+
+   Likes to look inside the program for a conference.
+
+*** Pattern: throw spaghetti at the wall
+    Write stuff. Ask what works.
+
+    Disfunction: Spring, Tomcat, Hibernate, ..., what are we building?
+
+    Despise ORMs: impedance mismatch. If you have a domain model
+    that's different from the relational DB then there's a lot of
+    pain.
+
+    Years ago the selling points for DBs were things that we don't
+    even consider now. Now the selling points for ORMs are that we can
+    move from Oracle to MySQL.
+
+    When you have two sides to a thing, and one side is really easy to
+    measure and the other is really hard, we end up over optimising
+    for the really easy to measure side.
+
+    Find an example of a function that you've used to reduce DRY. Copy
+    and paste it. Call different functions from different
+    places. Remove checks if you know that they're not needed for the
+    specific case. Get rid of things you know aren't needed. If the
+    functions are now different, you've found an example of coupling.
+
+    Developers love building things that noone wants. We love building
+    abstractions. 
+
+    In many cases it's worth writing code two or three times, rather
+    than extracting a common interface.
+
+    How many people think that they could move off of Hibernate within
+    a fortnight? Not many.
+
+    What percentage of the framework do you actually use? By
+    abstracting you're often compicating, and making harder to
+    understand. 
+
+    Understand that non-programmers can give as much value by hacking
+    around in Access as we do.
+
+    We could learn a lot by hiring a programmer.
+
+    We're trained to aim for perfection, when really business doesn't
+    have these problems. Business doesn't really have problems that
+    need optimising.
