@@ -464,6 +464,25 @@ assert(p99_latency < 50)
       for the people.
     * Small teams vs big teams
 
+**** Pattern: shallow silos
+     
+     Normal wisdom says that you shouldn't work in silos. If you're
+     just in silos you have a bus count of 1. At the other end of the
+     spectrum, if you pair all the time, you might find that context
+     switching is a large overhead.
+
+     Balance pair rotation with context switching.
+
+     Try having a separate standup with your stakeholder. You can plan
+     just what you need for the day.
+
+**** Other trade-offs
+     
+     * Automated vs manual builds
+       As soon as you automate anything you're locking down the
+       process. If you don't try the manual process you might miss out
+       information about the process.
+
 *** Development style
 *** Architecture
 *** Deployment
