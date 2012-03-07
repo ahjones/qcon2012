@@ -94,12 +94,14 @@ Joe Armstrong
     think of one. Ha ha.
 
     1. Isolation
+
        Isolate processes so that they can't damage one
        another. No shared memory, lightweight.
 
        Treating failure with shared memory is very difficult.
 
     2. Concurrency
+
        Run the processes in parallel. Hardware design will mean that
        soon we're able to run many processes concurrently.
 
@@ -107,6 +109,7 @@ Joe Armstrong
        running elsewhere.
 
     3. Failure detecting
+
        Erlang processes can detect failure. This is out of bound: not
        a normal message. It's a signal. It's messy if you handle
        failure in the same place that you handle normal stuff.
@@ -116,6 +119,7 @@ Joe Armstrong
        didn't manage.
 
     4. Fault identification
+
        Special processes that handle errors.
 
        #+BEGIN_SRC erlang
@@ -126,10 +130,11 @@ Joe Armstrong
        #+END_SRC
 
     5. Live code upgrade
+
        In Erlang you can modify code as it runs.
 
        #+BEGIN_SRC erlang
--module(foo).
+
 ...
 f1(X) ->
     foo:bar(X), % Call the latest version of this module
@@ -142,3 +147,5 @@ bar(X) ->
     6. Stable storage
        Use mnesia
        Use third party storage
+
+**** Fault tolerance implies scalability
