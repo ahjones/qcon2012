@@ -90,3 +90,23 @@ Joe Armstrong
      The big idea is messaging. -- Alan Kay
      #+END_QUOTE
 *** How to satisfy the properties in Erlang
+    Use a programming language designed for it. Armstrong can only
+    think of one. Ha ha.
+
+    1. Isolation
+       Isolate processes so that they can't damage one
+       another. No shared memory, lightweight.
+
+       Treating failure with shared memory is very difficult.
+
+    2. Concurrency
+       Run the processes in parallel. Hardware design will mean that
+       soon we're able to run many processes concurrently.
+
+       Erlang has network transparency so the processes might be
+       running elsewhere.
+
+    3. Failure detecting
+       Erlang processes can detect failure. This is out of bound: not
+       a normal message. It's a signal. It's messy if you handle
+       failure in the same place that you handle normal stuff.
