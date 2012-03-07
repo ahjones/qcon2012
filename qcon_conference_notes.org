@@ -110,3 +110,31 @@ Joe Armstrong
        Erlang processes can detect failure. This is out of bound: not
        a normal message. It's a signal. It's messy if you handle
        failure in the same place that you handle normal stuff.
+       
+       Fix the failure somewhere else. What does failing A have to
+       send running B so that B can carry on doing the job that A
+       didn't manage.
+
+    4. Fault identification
+       Special processes that handle errors.
+
+       #+BEGIN_SRC erlang
+       receive
+           {'EXIT', Pid, Why} ->
+               error_log:log_error({erlang:now(), Pid, Why})
+       end
+       #+END_SRC
+
+    5. Live code upgrade
+       In Erlang you can modify code as it runs.
+
+       #+BEGIN_SRC erlang
+       -module(foo).
+       ...
+       f1(X) ->
+         foo:bar(X), % Call the latest version of this module
+         bar(X). % Call this version of bar
+       
+       bar(X) ->
+         ...
+       #+END_SRC
