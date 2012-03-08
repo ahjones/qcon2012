@@ -604,3 +604,219 @@ assert(p99_latency < 50)
     We're trained to aim for perfection, when really business doesn't
     have these problems. Business doesn't really have problems that
     need optimising.
+
+** Simple made easy
+   
+   Rich Hickey
+
+#+begin_quote
+   Simplicity is prerequisite for reliability.
+#+end_quote
+
+*** Word Origins
+
+    - Simple :: sim-plex one fold/braid
+		One role or task that something has to do. Once
+                concept. Different from one instance and one
+                operation. Don't interleave.
+
+		It's objective: things are either twisted together or
+                they're not.
+
+    - Easy :: lie near
+	      Near - on our hard drive; near ot our understanding;
+              near to our capabilities. "No one's really significantly
+              smarter than anyone else".
+
+	      Easy is relative. Near to what?
+
+	      We repeatedly choose things that are near. If we
+              continue to do that we'll not learn anything new.
+
+*** Construct vs Artifact
+
+    We focus on experience of use of construct, rather than the long
+    term results of the use of the artifact.
+
+    Don't assess constructs by their artifacts.
+
+*** Limits
+    
+    You can't make something reliable if you don't understand it. If
+    things are intertwined, and you need to examine one thing that has
+    a problem, you get everything that it's attached to.
+
+*** Change
+
+#+begin_quote
+I don't think your test suite makes you able to change your code
+without fear.
+#+end_quote
+
+    Your ability to reason about your code is your ability to change
+    it without fear.
+
+*** Debugging
+
+    Every bug that you've found: passed all of the tests, satisfied
+    the type checker. Your ability to reason about your program is
+    critical to debugging.
+
+*** Development speed
+
+    If you emphasise ease, you'll be speedy at the beginning; ignoring
+    the complexity will slow you down over the long term.
+
+    If you aren't careful an elephant will come into your standup and
+    trample everyone.
+
+*** Easy yet complex
+
+    Easy things can be complicating. What matters is the complexity
+    that the 'easy' things yield. For example 'x=5' is very easy, but
+    what does it mean when you find it in the middle of a block of
+    code. 
+
+*** Simplicity benefits
+
+    Ease of understanding, change, debugging. Flexible policy,
+    location. Just because you can test something doesn't mean you can
+    change it rapidly.
+
+*** Making things easy
+
+    Get used to it. But what about thinking about it. How quickly can
+    you change your ability to thing about the problem? Not very. The
+    distance between your problem and yourself is large. What are you
+    going to do? Change the distance between you and the problem, by
+    making it more simple.
+
+*** Parens are hard!
+
+    You're not used to them, so they're not nearby. Are they simple?
+    No! Not for Scheme. What could be simpler than having one thing?
+    The one thing isn't the problem. Because there's one thing, the
+    concept is overloaded. So the thing that's simpler that one thing,
+    is more than one thing. In Clojure, parens almost always mean a
+    call, vectors are used for grouping.
+
+#+begin_quote
+LISP programmers know the value of everything and the cost of
+nothing. --Alan Perlis
+#+end_quote
+
+    More recently s/value/benefit/.
+
+    |------------+-------------------------------|
+    | Complexity | Simplicity                    |
+    |------------+-------------------------------|
+    | State      | Values                        |
+    | Methods    | Functions, namespaces         |
+    | ORM        | Declaritive data manipulation |
+    | Syntax     | Data                          |
+    |------------+-------------------------------|
+
+*** Complect
+    
+    You complected my thing. To interleave, entwine or braid.
+
+    Best to avoid in the first place. It wasn't a mistake in the
+    beginning: we went out and did it. What's the fix? Compose.
+
+*** Compose
+
+#+begin_quote
+Composing simple components is the key to robost software.
+#+end_quote
+
+**** Modularity and simplicity
+     
+     Simplicity implies partitioning and stratification, but not the
+     other way around. Be careful. Just because you've partitioned
+     things, doesn't mean that it is going to be simple. This is
+     important. Component A may well 'know' about the operation of B,
+     and B may know about A in the same way. This isn't simple.
+
+*** State is never simple
+
+    But it is easy. State makes your program more complicated even if
+    you have only one thread.
+
+*** Refs / vars
+
+    If you're using more than one variable to represent a thing you're
+    doing it wrong.
+
+    |------------------------+----------------------------------------------------------------------------|
+    | Construct              | Complects                                                                  |
+    |------------------------+----------------------------------------------------------------------------|
+    | State                  | Everything that it touches                                                 |
+    | Objects                | State, identity, value, ops, ...                                           |
+    |                        | There's loads of stuff all baked in, everything just gets horrid.          |
+    | Syntax                 | Meaning, order. The meaning of something and the arrangement are combined. |
+    | Inheritance            | Types                                                                      |
+    | Switch / matching      | Multiple who/what pairs                                                    |
+    | Variables              | Value, time                                                                |
+    | Imperitave loops, fold | What / how                                                                 |
+    | ORM                    | OMG!                                                                       |
+    | Conditionals           | Why, rest of program                                                       |
+    |------------------------+----------------------------------------------------------------------------|
+
+*** Simplicity toolkit
+
+    Use the language or libraries.
+
+*** Environmental complexity
+
+    The kind of complexity that you can't do anything
+    about. Individual good decisions don't combine to make many good
+    things. 
+
+*** Abstract for simplicity
+
+    Don't do it too much. It's certainly been bashed a lot here. But
+    realise that it can be right. Choose, say, ten abstractions for
+    your team. You won't choose IThingyFactoryProcessor because then
+    you've only got nine abstractions left.
+
+#+begin_quote
+I don't know, I don't want to know.
+#+end_quote
+
+*** Information
+    
+    Information is simple, but don't make it more complex by shoving
+    it into a class with its own micro-language.
+
+**** Encapsulation
+
+     Encapsulation is for implementation details, not for
+     information. Information doesn't have implementation, unless you
+     added one. Why? If the answer is, "because I'm using Java" that's
+     not a great answer.
+
+     Wrapping information: that's the way the languaages make you do
+     it.
+
+     Litmust test: Can you move it? Can you move your subsystems to a
+     different process, thread, language? How much do you need to
+     change? 
+
+     If you pull stuff out of process, then perhaps you'll get
+     IOExceptions pervaiding everything. Subsystems should have data
+     as the interface: data in, data out. Not IPersonInfo.
+
+     See HTTP calls: are we going to be making circular HTTP calls to
+     get stuff done? No! That's stupid! So why do it in one process?
+
+*** Choose simplicity
+
+    Get to dislike entanglement. Your tools don't measure simplicity:
+    tests, type checkers, refactoring. They're not bad, but they don't
+    do it for you.
+
+*** Simplicity made easy
+
+    - Choose simple constructs
+    - Create abstractions with simplicity as a basis
+    - Often simple means more things, not fewer.
