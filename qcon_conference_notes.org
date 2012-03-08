@@ -1102,8 +1102,6 @@ I don't know, I don't want to know.
      logs must be parsable. You've got to be able to use grep to find
      the problem.
 
-    
-
 ** Cloud9 IDE in JavaScript
 *** How do you write an IDE in the browser?
 
@@ -1140,3 +1138,162 @@ I don't know, I don't want to know.
 **** Enter treehuger.js
 
      "The jquery of analysis".
+** Big Data at Facebook
+*** Big data
+    - 25PB of compressed data
+    - 150PB of uncompressed data
+    - 400TB/day of uncompressed raw data
+
+**** What's it used for?
+     - Reporting
+     - Model generation
+     - Analysis
+     - Index generation
+
+**** A/B testing
+     Non-intuitive results.
+
+**** Friend map
+     Impossible without the data infrastructure that they've built.
+** Modelling process
+
+   Rich Hickey
+
+*** What's more fundamental?
+
+    Time, process
+
+*** Terms
+
+    - Value :: immutable magniture, quantity, number
+    - Identity :: a putative entity we associate with a series of
+                  causally related values over time
+    - Sate :: Value of an identity at a moment in time
+    - Time :: Relative before / after ordering of causal values
+
+*** Process
+
+    Deals with things that change. Problem: two cars vying for the
+    same parking space. What is place?
+
+*** Are places in charge?
+
+    Should a parking space have a picnic method? Should a park have a
+    post-gig method?
+
+*** What do we see?
+
+    Light. We don't put our eyes on the table. Time elapses. We don't
+    see the table right now. We just see the past.
+
+    You don't see the present in your program. Look at the caching
+    architecture. L1 cache, L2 cache, multiple independent caches per
+    CPU. 
+
+*** Problem
+
+    1. Reality
+    2. Perception
+    3. Memory
+    4. Logic
+
+    In our program how do we perceive things? We take our eye to the
+    table.
+
+*** Perception
+
+    - Perceive :: take entirely
+
+    Sensory systems only ever perceive the past.
+
+*** Memory
+
+    - Memory :: Mindful, remembering
+		
+    New memories about the same identities don't replace the old.
+
+*** Program memory
+
+    Sometimes like brain memory, mostly like place memory.
+
+    + Destroys the past
+    + Corrupts remembering
+    + Interferes with perception
+
+    Locking: freeze the universe while I can read this
+    stuff. Perception should be highly paralelizable.
+
+*** Process
+
+    - Process :: go forward, advance
+
+		
+    Fan of functional programming, but got to allow change.
+		 
+    Leave the past begind. Not food calculators.
+
+    Connecting everything to the participants is inherantly
+    broken. Where's the win method on the sumo restler?
+
+*** Philosophy
+
+    Things don't change in place. Place includes time. The future is a
+    function of the past. Coordination is desirable locally.
+
+*** Epochal time model
+
+#+begin_quote
+
+
+       F     F     F     pure events (functions)
+     /   \ /  \  /   \
+    v1 => v2 => v3 -> v4 states
+
+    All vs together: identity.
+    Observers observe v1, v2, ...
+
+#+end_quote
+
+*** Persistent structures
+    
+    Yay!
+
+    + Immutable
+    + Safe on the disk
+    + Great fit for perceptions and memories
+
+    + Not idiomatic in Java
+
+*** Identity constructs as gatekeepers of time
+
+    ???
+
+*** Functional model
+
+    Wow this is going fast.
+
+*** CAS as time construct
+
+#+begin_src clojure
+(swqp! an-atom f args)
+
+(f vN args) ;; becomes vN + 1
+#+end_src
+
+    Clojure, but you can make one in Java easily.
+
+*** But...
+    
+    What if my logical unit of work involves a million steps? Creating
+    a million interim values via pure function invocation is a waste.
+
+*** Transient
+
+    Structure that is a simbiotic twin of persistant structures. Not
+    lasting. When applied to structures, not persistant.
+
+    No one sees the transient in the middle of the op.
+
+*** Proc
+    
+    Function of transient to transient. Can't affect the world.
