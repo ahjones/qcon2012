@@ -947,7 +947,6 @@ I don't know, I don't want to know.
      And if synergies can be identified.... 
 #+end_quote
 
-
 ** Architecting for failure at the Guardian
 
    Michael Bunton-Spall @bruntonspall
@@ -1104,3 +1103,40 @@ I don't know, I don't want to know.
      the problem.
 
     
+
+** Cloud9 IDE in JavaScript
+*** How do you write an IDE in the browser?
+
+    Every thing is a DOM element. Everything is a span.
+
+    Problem: if you edit an 80,000 line file, how does the browser
+    handle that?  How big would the DOM be?
+
+    Solution: only show the bits that you can see.
+
+    
+*** Size
+
+    240,000 lines of code.
+
+*** JavaScript
+
+    Compare the good parts to the whole langage.
+
+    Static file analysis.
+
+*** Static analysis with JavaScript
+
+    Two things needed
+    + Parse
+    + Analyse
+
+**** Parse
+
+     JavaScript in, AST (abstract syntax tree) out.
+
+**** Analyse
+
+**** Enter treehuger.js
+
+     "The jquery of analysis".
