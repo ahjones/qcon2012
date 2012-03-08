@@ -820,3 +820,287 @@ I don't know, I don't want to know.
     - Choose simple constructs
     - Create abstractions with simplicity as a basis
     - Often simple means more things, not fewer.
+
+** Progressive architectures at RBS
+
+   Many suits.
+
+   RBS pionered the use of XML and made it easy. Ha ha ha.
+
+*** New drivers
+
+    Change. There's lots of it.
+    - Regulation
+    - Faster trades
+      Nano second timing
+    - Utilisation
+      Just enough hardware
+
+    All has to be done with tighter budgets. "I'm sure you'll all be
+    glad to hear".
+
+*** What do they do?
+
+    - UX
+      Not just a pretty front end, improve the effectiveness of the
+      users of the system.
+    - Big data
+    - Data visualisation
+    - Data virtualisation
+
+*** The Manhattan Processor
+    
+    Avoiding GC pauses in high frequency trading.
+
+    In the past, things had to be written in C++ because it was seen
+    as the only way to get away from the GC.
+
+    The Manhattan Processor is similar to the LMAX disruptor.
+
+    What happens if Apple trading at 595p announces good financial
+    results, and therefore the price rises to 615p, but Java decides
+    to perform a full GC at the same time? Big deal!
+
+**** The GC
+     Cost : 1 second per GB of heap, at best. Tuning the GC isn't
+     really enough.
+
+     Two options:
+     - Use massive Eden space, and don't go over that space. Then you
+       won't have a GC run.
+     - Use a small Eden space, then GC will run in known time.
+
+     RBS use the second option. For many reasons it's easier: if
+     you're using third party libraries, you don't know how much space
+     they're going to use.
+
+       
+**** What is the MP?
+     
+     - In house, non-allocating queue specialised for multiple produce
+       single consumer requirement.
+     - Predictable pauses < 1ms
+     - No full collection in 15hr trading day.
+
+*** Risk
+
+**** What's the big deal?
+     
+     Precting the future.
+
+**** History
+     
+     + Linear approximation
+     + Single-step Monte Carlo
+     + Multi-step Monte Carlo
+
+     The market is complex. It needs to be modelled as such.
+
+**** Monte Carlo
+
+     Random number generator. More experiments give better results.
+
+     Eg estimate area of circle: is a random point inside the
+     circle. Ratio of yes / no gives the area of the circle.
+
+**** Multi step Monte Carlo
+
+     Many events that can affect the outcome. Have to be able to model
+     the events at discrete points in time.
+
+     Multi step simulation needs thousands of compute cores. How do
+     they manage that? Distributed computers. This can generate ~10TBs
+     of data. How is this stored? Its got to be accessed concurrently
+     by many engines.
+
+**** Requirements
+     
+     + Speed
+     + Scalability
+     + Robustness
+     + Interoperability
+     + Support infrastructure
+
+***** Distributed file systems
+      
+      HBase, HDFS, etc. NAS. HDFS really stood out for them.
+
+*** ODC: One vesion of the truth for everyone
+
+    ESB allows them to distribute information around the
+    organisation. There are limits to messaging.
+
+**** Problem
+
+     Leaves interpretation of the facts to the consmer. Different
+     consumers can end up with different interpretations of the truth.
+
+     Copying data lies at the root of many of the bank's problems.
+
+**** Solution
+     
+     Central store: gets all eyes on a single version of the truth.
+
+     Need: low latency, high throughput.
+
+#+begin_quote
+     And if synergies can be identified.... 
+#+end_quote
+
+
+** Architecting for failure at the Guardian
+
+   Michael Bunton-Spall @bruntonspall
+
+   Sharing failure. Cock up less. Mistakes are often the most
+   interesting part.
+  
+   content.guardianapis.com
+
+*** Summary
+
+    Systems are going to fail.
+
+    Architect for failure:
+    + Prevent
+    + Mitigate
+
+*** Pre 2008
+
+    J2EE basics. Apply scaling basics, like load balancers and
+    multiple app servers, but still only one DB. Can scale, in theory,
+    by adding more balancers and servers. 
+
+**** Scaled architecture
+     + Can't scale DB in the same way
+
+**** Eventual
+     Global load balancer -> load balancers -> App servers -> Multiple
+     DBs as active / passive.
+
+     Gives redundancy with multiple data servers. Multiple internet
+     connections. 
+
+***** Success
+      + 3.5M daily browsers
+      + 1.6M unique pieces of content
+      + Hundreds of staff
+      + Can create micro-sites
+
+***** Drawback
+      + Monolithic
+	+ One sytem that understands everything
+	  + Football
+	  + Finance
+	  + Mortgage
+	  + Content
+	+ Deployment
+	+ Build time
+
+*** Microapps circa 2011
+
+    Framework. See front page. In a monolithic system everything has
+    to be rendered by the same thing. Decompose it.
+    + Core content
+    + Metadata
+    + Microapps
+      Can be managed independently. Just because you change one bit
+      doesn't mean you need to build and test everything else.
+      + Tweets
+      + More on this story
+
+**** Microapps
+
+     SSI like technology, over HTTP. You just have an URL to be
+     embedded in the page, and that'll return all the HTML that needs
+     to appear in the page.
+
+     + Advantages
+       + HTTP well known
+       + Comes wth caching
+	 + max-age
+	 + stale-if-error
+	   + Squid extra thingy. I don't mind seeing stale stuff if
+             there's really an error. The cache will continue
+             returning data until you've fixed the microapp.
+       + Don't care about what renders the HTML, therefore you aren't
+         tied to J2EE for everything. Tired of getters and
+         setters. They can be hosted where you want: AppEngine,
+         internally.
+	 + If you host on AppEngine you don't have to talk to your ops
+           team.
+	 + Therefore development is faster.
+	 + "Actually I can do this better in a different language".
+	 + Innovation improves.
+
+
+     Microapps don't talk to the database directly. They talk through
+     the Content API.
+
+     Problem: what if you put the new thing on the main page, and
+     everyone sees it. All of a sudden, the quota is exceeded and
+     everyone sees an error. Solution: put a cache between the main
+     app and the microapps.
+
+     + Cons
+       + Support
+       + Maintainence
+       + Diversification
+	 + Decided to settle on the JVM. Willing to pay the cost of
+           working with other things on the JVM.
+       + The ops team have to know how to monitor what you've
+         written. Some of it is on EC2, some on AppEngine etc.
+       + Also increased complexity.
+	 + Big cache. Memcached. 40G cached HTML.
+       + Latency (the big one)
+	 + Microapp latency affects CMS latency.
+	 + Slow is a big problem. Full GCs. 500s are better.
+
+**** Emergency mode
+
+     Peaky traffic was a problem. They featured a cuddly rat that
+     everyone liked.
+
+     Sometimes you need speed, and can get rid of dynamic stuff.
+     + Caches don't expire
+     + Page pressing
+       + Full page cache
+       + Capable of 1k pages/second/server
+
+**** Caching problems
+
+     It's more important to cache page one than page 700. Cache the
+     important stuff.
+
+**** Monitoring
+
+     One of the most important things you can do. What changed? What
+     can I turn off to stop it going wrong? Is CPU usage that
+     important when something is going wrong? It's normally a side
+     effect.
+
+     Alerting is not monitoring.
+
+**** Switches
+
+     You need them so you can turn things off. The Guardian uses
+     releae valves.
+     
+     Some switches are automatic. For example emergency mode is
+     automatic. Don't alert just because you've gone into emergency
+     mode, that's fine. If you go into emergency mode every five
+     minutes that's a problem.
+
+     Don't ping-pong automatic switches. Go in, wait, then leave.
+
+**** Diagnosis
+     
+     Why care? You must be able to architect the system so you can
+     diagnose the problem. Log analysis is important. Get the logs off
+     the server, then you can restart the server.
+
+     If your logs are 30 gigs then copying will take a long time. Your
+     logs must be parsable. You've got to be able to use grep to find
+     the problem.
+
+    
