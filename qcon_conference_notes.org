@@ -1604,7 +1604,39 @@ I don't know, I don't want to know.
 
     Huge drop in verbosity.
 
-    Started off writing tests. They were excited about writing the tests.
+    Started off writing tests. They were excited about writing the
+    tests. They found that they were just writing Scala as more
+    concise Java. They didn't rewrite everything, but whenever they
+    touched a class they rewrote it.
+
+    Eventually they decided to ditch the old Java libs that they were
+    using and go to scala + lift + solr.
+
+    Plan: didn't really have one. The rest of the team saw their
+    happiness with the new language. 21 back end developers.
+
+    What's the best way of learning about Scala. Sitting and talking
+    about it. Most people estimated that it took between one and three
+    months to get as productive in Scala as they were in Java.
+
 *** Impact
+
+**** Recruitment
+
+     How on earth do they get good Scala programmers? They look for
+     good Java developers who want to learn Scala. They attract the
+     polyglots who are interested in learning the language.
+
+**** Problems
+
+     They simply havenm't had the problems that have been popularly
+     reported in the press.
+
+**** Value
+     + Clarity over cleverness
+
 *** Outcomes
 
+**** Immutability
+     They don't really do functional programming. They find that
+     writing components that are immutable helps a lot.
