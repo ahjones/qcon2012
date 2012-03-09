@@ -1358,6 +1358,7 @@ I don't know, I don't want to know.
        Noise that doesn't help.
 
 ***** TODO Find Jens Rasmussen paper
+
       + Skill based
 	Simple, routine
       + Rule based
@@ -1365,3 +1366,51 @@ I don't know, I don't want to know.
 	Probably spend most of our time here, or above
       + Knowledge based
 	WTF is going on? Lone-wolf, vagabonding etc.
+
+*** High reliability organisations
+    
+**** TODO see Managing the Unexpected
+**** TODO see The self-designing high-reliability organization
+
+     Aircraft carrier: shrink SF airport onto an aircraft carrier,
+     reduce the time between take off and landing.
+
+     + Close interdependence between groups
+     + Close coordination and information sharing
+     + High redundancy
+     + Broad definition of who belongs on the team
+     + Teammates inculuded in the comms loop
+     + Lots of error correction
+     + Constant awareness of risk of failure
+     + Detailed records, so you can learn from them
+     + Authority patterns dispersed
+       People who handle an outage should have the authority to handle
+       the situation
+     + Reporting of errors is rewarded
+
+*** What else can we do?
+
+    + Drill
+      Practice what you're going to do. You've got to be familiar with
+      the tools that you are going to use. Practice using tcpdump if
+      that's what you are going to have to use in an outage.
+    + GameDay
+      In production. Affect the infrastructure, in production, while
+      it's being used. How much is it going to hurt? How quickly can
+      we get the system rebuilt. Don't freak out.
+    + Learn to improvise
+      We can adapt. Realise it.
+    + Learn from mistakes
+      Postmortems.
+      + Timelines: what happened when.
+      + Put it in public, everyone invited.
+      + Search for second stories, instead of human error.
+	Why did it make sense for someone to make a mistake. It did
+        make sense to them at the time. They did something because it
+        made sense. Don't blame training or specific individual
+        characteristics.
+      + Cultivate blamelessness
+	This doesn't mean everyone is off the hook.
+      + Give people authority to improve things
+      + Collaborative and skillful communication
+
