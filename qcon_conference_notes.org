@@ -1297,3 +1297,71 @@ I don't know, I don't want to know.
 *** Proc
     
     Function of transient to transient. Can't affect the world.
+
+** Resilient response in complex systems
+
+   John Allspaw - Etsy
+
+*** Operability
+
+    We hae a responsibility to write operable software. As important
+    as functionality. How it runs in production is your main concern.
+
+    Last year AWS went down for 80 hours. Failure can happen to
+    anyone. 
+
+    How can this happen in 2012? Complex systems:
+    + Cascading
+    + non-linear
+    + feedback loops
+    + etc
+
+
+    Do we know what we're doing?
+
+    We don't need to ask why it happens, just get used to the fact
+    that it is going to happen. Instead ask: what are you going to do
+    when it does happen?
+
+    If we only spend effort and time on prevention, we're missing out
+    on working on solutions to failure. Pay the firefighters.
+
+    Have a look at [[http://www.kitchensoap.com/2011/04/07/resilience-engineering-part-i/][this]].
+
+*** Symptoms in an emergency
+
+    + Forced beyond your learned roles.
+    + Perform actions which have consequences that are unknown and or
+      hard to see.
+    + Cognitively and perceptively noisy.
+
+*** What shall we do about it?
+
+    Learn from others that have done this before.
+
+**** Characteristics of response
+     
+     + Neglect how processes develop
+     + Forget what happened, almost as soon as it happens
+     + Difficulty dealing with exponential increases in speed
+     + Think in causal series not causal nets
+       Not dominoes
+     + Thematic vagabonding
+       Flip from one thing to another.
+     + Goal fixation
+       Opposite of the last. It's got to be the x.
+     + Refusal to make decisions
+       Too much stuff to think about. Not enough authority.
+     + Unnecessary heroism
+       Non communicating lone-wolf
+     + Distraction
+       Noise that doesn't help.
+
+***** TODO Find Jens Rasmussen paper
+      + Skill based
+	Simple, routine
+      + Rule based
+	Knowable, rule based.
+	Probably spend most of our time here, or above
+      + Knowledge based
+	WTF is going on? Lone-wolf, vagabonding etc.
