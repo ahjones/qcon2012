@@ -1413,4 +1413,124 @@ I don't know, I don't want to know.
 	This doesn't mean everyone is off the hook.
       + Give people authority to improve things
       + Collaborative and skillful communication
+    +  Share near-miss events
+       Say when you've nearly cocked up. 
 
+*** Automation
+
+    Ironies of automation - Lisanne Bainbridge
+
+    + Move human from manual operator to supervisor.
+    + Augments humans ability
+    + Doesn't remove human error
+      This can occur at the automation time
+    + Brittle
+      You can only do what has been pre-programmed.
+
+**** Law of stretched systems
+
+     Things are stretched to capacity. As soon as there is an
+     improvement, it will be exploited to a new tempo and intensity of
+     activity.
+
+     Theere are considerations instead of blindly automating.
+
+*** Near misses
+
+    + Act like vaccines
+    + Happen more often, so more data
+    + Reminder of hazards
+
+*** Parting thoughts
+    
+    Don't just think about failure. Think about why you don't have an
+    outage every day.
+
+    1. Ways in which things go right are special cases of things that
+       go wrong.
+
+    2. Ways things that go wrong are special cases of things that go
+       right. 
+
+       
+    Which one? Perhaps both. Don't just ask why did we fail, also ask
+    why did we succeed?
+
+    Don't ignore failure prevention.
+
+** Faith, Evolution and Programming Languages
+   
+   Philip Wadler
+
+*** Faith, evolution
+
+    Evolution happens in our field, much more rapidly than in
+    life. What are the timescales? It seems that they're short, but
+    perhaps there are important things that evolve over larger
+    timescales than are apparent.
+
+*** Gerhard Getzen
+
+    Nazi. Founder of field. Natural detuction. Boole 1820s
+
+    Want to be able to simplify proofs. Why? If a proof is in simplest
+    form, you know that you only have to prove subformulas of the
+    problem. Eg To prove A => B you only need to prove A and B, not
+    C. 
+
+    There are no proofs of false. You don't want to be able to prove
+    false. 
+
+    The history of logic is filled with simple things that people
+    didn't see for 20, or 30 or 50 years. You should be on the lookout
+    for these sorts of things.
+
+*** Church, Lambda calculus 1940
+
+    Interested in a nice notation for writing logical proofs, and
+    wanted to be able to abstract procedures for intalectual control.
+
+    Function and record construction.
+
+    These two things are isomorphic. The correspondense wasn't
+    published until 1980. This is why you should pay attention to
+    theoretical computer science.
+
+    
+
+*** Curry-Howard isomorphism 1980
+
+    (Haskell Curry)
+    
+    Curry noticed the correspondence between things that looked like
+    programs and things that look like logic.
+
+    Every good idea in computing should first be discovered by a
+    logician. 
+
+*** Milner polymorphic types paper
+
+    Great ideas are so great that you discover them twice.
+
+*** Frege quantifiers (for all)
+
+    You can prove (x + 1)^2 is x^2 + 2x + 1 and it's true for all x.
+
+    Proofs always terminate. Typed lambda calculus therefore always
+    terminates. But you want to be able to do interesting stuff, that
+    you can only do with things that you can't prove will
+    terminate. Therefore, you can add back into the typed lambda
+    calculus recursion that'll let you not terminate.
+
+    You can write a language that will have known complexity.
+
+*** Haskell type classes
+
+    Look them up, they're great. Once you've designed your library
+    properly you immediatly get things like comparison or printing for
+    free. 
+
+*** Blame calculus
+
+    Derive the type checks that you need in untyped code so that you
+    can communicate from a typed language to an untyped language.
