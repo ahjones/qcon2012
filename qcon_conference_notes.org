@@ -948,6 +948,9 @@ I don't know, I don't want to know.
 #+end_quote
 
 ** Architecting for failure at the Guardian
+   :PROPERTIES:
+   :CUSTOM_ID: guardian1
+   :END:
 
    Michael Bunton-Spall @bruntonspall
 
@@ -1534,3 +1537,74 @@ I don't know, I don't want to know.
 
     Derive the type checks that you need in untyped code so that you
     can communicate from a typed language to an untyped language.
+
+** Play framework reactive framework
+*** What is it? 
+
+    Web application framwork for scala and java.
+
+*** Why reactive?
+
+    Need to be able to model the streams of data. One request per
+    thread doesn't scale.
+
+**** Java input stream
+
+     Blocks until complete. I'd like to be notified when data is
+     available.
+     
+**** A reactive model
+     
+     IOC.
+
+** Scala at the Guardian
+
+   Graham Tackley
+   @tackers
+
+*** Background
+    3.5M unique browsers, second most popular after the Daily Mail.
+
+    Line counts
+    + 185k lines of java
+    + 35k lines XML
+    + 72k lines velocity
+    + 250k lines of test java
+
+**** It's OK, but
+
+     + Two week code to live time.
+     + Slow to work with.
+     + Don't use an ORM.
+
+       
+     Pre 2009 everything had to be part of that code base. Post that,
+     they implemented the micro-app framework mentioned in the other
+     talk. [[#guardian1][Talk]]
+
+
+**** Value
+
+     They value small independent components over the monolith. The
+     monolith: refactoring is easier in one big monolith. The relief
+     of not having a massive code base was huge.
+
+     Clarity of intent over ceremonial abstraction.
+
+**** Python
+
+     They were using Python, but found that it was too different. They
+     found that they didn't want to throw away everything that they'd
+     done already. Evolution not revolution.
+
+*** Decision
+
+    Lots of the tools that they were used to they could continue to
+    use. Same runtime. Still just a war deployed to production.
+
+    Huge drop in verbosity.
+
+    Started off writing tests. They were excited about writing the tests.
+*** Impact
+*** Outcomes
+
