@@ -1640,3 +1640,92 @@ I don't know, I don't want to know.
 **** Immutability
      They don't really do functional programming. They find that
      writing components that are immutable helps a lot.
+
+** Erlang, the language from the future
+   
+   Damian Katz
+
+*** What is it?
+
+    Functional concrrent programming language. Built at Ericsson in
+    80s and 90s.
+
+    Used in telecoms switches.
+
+
+**** What is it like?
+
+     Weird. "Boy, this is really bizarre".
+
+     Once writing CouchDB was really motivated to persist with
+     learning it. Extremely productive.
+
+     Kind of slow.
+
+**** Weird
+     
+     If completely useless. Case makes up for it.
+
+     Simple. Taken aback by the simplicity of it. No classes, no OO,
+     but it has records. Syntactic sugar for tag tuples.
+
+     Functional. Create closures, pass around functions.
+
+     Wow, this seems odd. Comparing it to OO languages.
+
+**** How do you get anything done without OO?
+
+     You get used to it. Before you know it you're productive.
+
+**** Concurrency
+
+     Has processes. Communicate with messages.
+
+     Don't get stop the world GC. Every process can be GCed
+     individually. 
+
+**** Error handling
+
+     Let it crash. The supervisor process will notice. Simplifies
+     application code, leads to much more reliable software.
+
+     Hard to believe, but it's true.
+
+**** Pattern matching
+
+     Makes it very easy to extract what you want.
+
+*** Why is it from the future?
+
+    In the past, there was one CPU and uniform main
+    memory. Concurrency was about making one process to many things. 
+    
+    Now we've got the multi-core present. NUMA : non uniform memory
+    access. 
+
+**** Most languages don't model reality.
+
+     We still have a big flat memory model, and each access has the
+     same cost. But that's not the case. Our hardware doesn't work
+     that way anymore.
+
+     Erlang maps very well to the multi-core reality that we have
+     today. It looks a lot like the physical hardware that we're
+     running on.
+
+**** Accidental multi-core awwwesomeness
+
+     Messaging between systems should be as easy as messaging within
+     the system itself.
+*** Erlang and CouchDB
+
+    Not so fast.
+
+    What's the problem? Syntax. The weird syntax makes Erlang
+    slow. Weird syntax makes it hard to get massive adoption. Massive
+    adoption makes it hard to get lots of people making it very fast.
+
+*** When would you use it?
+
+    Back end heavy lifting systems. 
+**** When would you avoid it?
